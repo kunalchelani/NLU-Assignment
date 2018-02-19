@@ -34,8 +34,8 @@ def kneser_ney_setup(train_tokens):
 		
 		bigram = train_tokens[i:i+2]
 		
-		print bigram
-		print "\n"
+		#print bigram
+		#print "\n"
 
 		f = bigram[0]
 		s = bigram[1]
@@ -61,8 +61,8 @@ def kneser_ney_setup(train_tokens):
 	for i in range(0, len(train_tokens) - 2):
 		
 		trigram = train_tokens[i:i+3]
-		print trigram
-		print "\n"
+		#print trigram
+		#print "\n"
 
 		f = trigram[0]
 		s = trigram[1]
@@ -120,8 +120,8 @@ def get_ngram_cnt(ngram):
 
 def calc_kn_prob(ngram):
 
-	print ngram
-	
+	#print ngram
+
 	vocab_size = len(uni)
 	d = 0.75
 
@@ -166,4 +166,15 @@ def calc_kn_prob(ngram):
 	
 	else :
 		print "More than three is too much for now, will maybe cover it later"
-	
+
+def calc_kn_perplexity(tokens):
+
+	tot_log_prob = 0.0
+
+	for i in range(0, len(tokens) - 2):
+		trigram = tokens[i: i+2]
+		prob = calc_kn_prob(trigram)
+		tot_log_prob += math.log(prob)
+
+	power = (-1.0*tot_log_prob)/len(tokens)
+	print "Perplexity : {}".format(math.exp(power))

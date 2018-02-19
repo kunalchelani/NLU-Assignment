@@ -16,7 +16,7 @@ import prep_data
 
 gutenberg_path = '/home/kunal/Downloads/IISc-Acads/sem2/NLU/Assignment-1/Data/gutenberg/'
 
-bigram = ngram.N_gram(2, gutenberg_path)
+bigram = ngram.N_gram(2, gutenberg_path, thresh = 7)
 
 bigram.normalize_train_data()
 bigram.update_ngram_prob()

@@ -13,7 +13,7 @@ import prep_data
 
 class N_gram():
     
-    def __init__(self, n, data_directory):
+    def __init__(self, n, data_directory, thresh):
         
         if (n==2):
             print "Initializing bigram object"
@@ -32,7 +32,7 @@ class N_gram():
         self.test_tokens= test_tokens
         self.test_size = len(test_tokens)
         self.n = n
-
+        self.thresh = thresh
         return
     
     def normalize_train_data(self):
@@ -43,7 +43,7 @@ class N_gram():
         print "Number of tokens in train = {}".format( len(freq) )
 
         for index, token in enumerate(train_tokens):
-            if freq[token] < 5:
+            if freq[token] < self.thresh:
                train_tokens[index] = "UNK" 
 
         #print "Unknowns in train data :{}".format(count)
@@ -101,12 +101,12 @@ class N_gram():
         for index, token in enumerate(test_tokens):
             if token not in freq:
                 test_tokens[index] = "UNK"
-
+        '''
         fo = open("Test_tokens_normalized.txt", 'w')
         for token in test_tokens:
             print >> fo, "{} ".format(token)
         fo.close()        
-
+        '''
         self.test_tokens = test_tokens
 
     def calc_data_perplexity(self, tokens, freq, vocab_size, prob, n):
